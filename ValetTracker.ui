@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1006</width>
+    <height>780</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>13</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTabWidget" name="tab_new_entry">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1011</width>
+      <height>761</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Home</string>
+     </attribute>
+     <widget class="QPushButton" name="pushButton_4">
+      <property name="geometry">
+       <rect>
+        <x>550</x>
+        <y>400</y>
+        <width>291</width>
+        <height>111</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>28</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>TBD</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>400</y>
+        <width>291</width>
+        <height>111</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>28</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Raw Data</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_2">
+      <property name="geometry">
+       <rect>
+        <x>550</x>
+        <y>110</y>
+        <width>291</width>
+        <height>111</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>28</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>My Stats</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>110</y>
+        <width>291</width>
+        <height>111</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>28</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Create New Entry</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>20</y>
+        <width>301</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>34</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>Valet Tracker</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>New entry</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="tab_5">
+     <attribute name="title">
+      <string>Calculated Data</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="RawData">
+     <attribute name="title">
+      <string>Raw Data</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="tab_4">
+     <attribute name="title">
+      <string>Page</string>
+     </attribute>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1006</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(148, 148, 148);</string>
+   </property>
+   <widget class="QMenu" name="menupage_1">
+    <property name="title">
+     <string>Home </string>
+    </property>
+    <addaction name="Menu_home"/>
+   </widget>
+   <widget class="QMenu" name="menuNew_Entry">
+    <property name="title">
+     <string>Entries</string>
+    </property>
+    <addaction name="Menu_add_new_entry"/>
+    <addaction name="Menu_edit_or_delete_an_Entry"/>
+   </widget>
+   <widget class="QMenu" name="menuStats">
+    <property name="title">
+     <string>Stats</string>
+    </property>
+    <addaction name="Menu_calculated_Stats"/>
+    <addaction name="Menu_raw_data"/>
+   </widget>
+   <addaction name="menupage_1"/>
+   <addaction name="menuNew_Entry"/>
+   <addaction name="menuStats"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="Menu_add_new_entry">
+   <property name="text">
+    <string>Add A new Entry</string>
+   </property>
+  </action>
+  <action name="Menu_calculated_Stats">
+   <property name="text">
+    <string>Calculated Stats</string>
+   </property>
+  </action>
+  <action name="Menu_raw_data">
+   <property name="text">
+    <string>Raw data</string>
+   </property>
+  </action>
+  <action name="Menu_edit_or_delete_an_Entry">
+   <property name="text">
+    <string>Delete an Entry</string>
+   </property>
+  </action>
+  <action name="Menu_home">
+   <property name="text">
+    <string>Home</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
