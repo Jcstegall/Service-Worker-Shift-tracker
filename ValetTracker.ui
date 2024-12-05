@@ -22,7 +22,7 @@
    <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTabWidget" name="tab_new_entry">
+   <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -32,13 +32,13 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
-    <widget class="QWidget" name="tab">
+    <widget class="QWidget" name="tab_home">
      <attribute name="title">
       <string>Home</string>
      </attribute>
-     <widget class="QPushButton" name="pushButton_4">
+     <widget class="QPushButton" name="btn_TBD">
       <property name="geometry">
        <rect>
         <x>550</x>
@@ -97,7 +97,7 @@
        <rect>
         <x>30</x>
         <y>110</y>
-        <width>291</width>
+        <width>381</width>
         <height>111</height>
        </rect>
       </property>
@@ -115,7 +115,7 @@
        <rect>
         <x>330</x>
         <y>20</y>
-        <width>301</width>
+        <width>341</width>
         <height>51</height>
        </rect>
       </property>
@@ -136,7 +136,7 @@
      <attribute name="title">
       <string>New entry</string>
      </attribute>
-     <widget class="QPushButton" name="pushButton_5">
+     <widget class="QPushButton" name="btn_save_changes">
       <property name="geometry">
        <rect>
         <x>640</x>
@@ -177,7 +177,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>170</y>
+        <y>240</y>
         <width>191</width>
         <height>41</height>
        </rect>
@@ -190,7 +190,7 @@
       <property name="geometry">
        <rect>
         <x>230</x>
-        <y>170</y>
+        <y>240</y>
         <width>141</width>
         <height>31</height>
        </rect>
@@ -200,7 +200,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>240</y>
+        <y>310</y>
         <width>191</width>
         <height>41</height>
        </rect>
@@ -213,7 +213,7 @@
       <property name="geometry">
        <rect>
         <x>230</x>
-        <y>240</y>
+        <y>310</y>
         <width>141</width>
         <height>31</height>
        </rect>
@@ -223,7 +223,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>310</y>
+        <y>380</y>
         <width>191</width>
         <height>41</height>
        </rect>
@@ -236,7 +236,7 @@
       <property name="geometry">
        <rect>
         <x>230</x>
-        <y>310</y>
+        <y>380</y>
         <width>141</width>
         <height>31</height>
        </rect>
@@ -246,7 +246,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>380</y>
+        <y>450</y>
         <width>191</width>
         <height>41</height>
        </rect>
@@ -259,7 +259,7 @@
       <property name="geometry">
        <rect>
         <x>230</x>
-        <y>380</y>
+        <y>450</y>
         <width>141</width>
         <height>31</height>
        </rect>
@@ -324,7 +324,7 @@
        <string>TBD</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_7">
+     <widget class="QLineEdit" name="lineEdit_TBD_1">
       <property name="geometry">
        <rect>
         <x>640</x>
@@ -347,12 +347,35 @@
        <string>TBD</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_8">
+     <widget class="QLineEdit" name="lineEdit_TBD_2">
       <property name="geometry">
        <rect>
         <x>640</x>
         <y>380</y>
         <width>141</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_41">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>180</y>
+        <width>201</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Entry ID</string>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser_id">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>170</y>
+        <width>161</width>
         <height>31</height>
        </rect>
       </property>
@@ -386,16 +409,6 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_Total_Tips_recieved">
-      <property name="geometry">
-       <rect>
-        <x>230</x>
-        <y>150</y>
-        <width>141</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_12">
       <property name="geometry">
        <rect>
@@ -414,22 +427,12 @@
        <rect>
         <x>30</x>
         <y>210</y>
-        <width>201</width>
+        <width>221</width>
         <height>41</height>
        </rect>
       </property>
       <property name="text">
        <string>Average tips per shift</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit_Averag_tips_per_shift">
-      <property name="geometry">
-       <rect>
-        <x>230</x>
-        <y>210</y>
-        <width>141</width>
-        <height>31</height>
-       </rect>
       </property>
      </widget>
      <widget class="QLabel" name="label_14">
@@ -445,37 +448,17 @@
        <string>Average tips per hr</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_Average_tips_per_hr">
-      <property name="geometry">
-       <rect>
-        <x>230</x>
-        <y>270</y>
-        <width>141</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_Average_cars_parked_per_hour">
       <property name="geometry">
        <rect>
-        <x>590</x>
+        <x>610</x>
         <y>330</y>
-        <width>231</width>
+        <width>301</width>
         <height>41</height>
        </rect>
       </property>
       <property name="text">
        <string>Average cars parked per hour</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit_Average_tips_per_car">
-      <property name="geometry">
-       <rect>
-        <x>230</x>
-        <y>330</y>
-        <width>141</width>
-        <height>31</height>
-       </rect>
       </property>
      </widget>
      <widget class="QLabel" name="label_16">
@@ -514,16 +497,6 @@
        <string>Shift Statistics</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_Cars_per_hour">
-      <property name="geometry">
-       <rect>
-        <x>820</x>
-        <y>270</y>
-        <width>141</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_18">
       <property name="geometry">
        <rect>
@@ -537,22 +510,12 @@
        <string>Total cars parked</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_Average_cars_parked_per_hour">
-      <property name="geometry">
-       <rect>
-        <x>820</x>
-        <y>330</y>
-        <width>141</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_19">
       <property name="geometry">
        <rect>
         <x>30</x>
         <y>330</y>
-        <width>191</width>
+        <width>211</width>
         <height>41</height>
        </rect>
       </property>
@@ -573,26 +536,6 @@
        <string>Total hours worked</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_Total_hours_worked">
-      <property name="geometry">
-       <rect>
-        <x>820</x>
-        <y>150</y>
-        <width>141</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit_Total_cars_parked">
-      <property name="geometry">
-       <rect>
-        <x>820</x>
-        <y>210</y>
-        <width>141</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_21">
       <property name="geometry">
        <rect>
@@ -604,6 +547,86 @@
       </property>
       <property name="text">
        <string>Cars per hour</string>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser_Total_Tips_recieved">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>160</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser_Average_tips_per_shift">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>220</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser_Average_tips_per_hr">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>280</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser_Average_tips_per_car">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>340</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser_Total_hours_worked">
+      <property name="geometry">
+       <rect>
+        <x>840</x>
+        <y>150</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser_Total_cars_parked">
+      <property name="geometry">
+       <rect>
+        <x>840</x>
+        <y>220</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser_Cars_per_hour">
+      <property name="geometry">
+       <rect>
+        <x>840</x>
+        <y>270</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser_Average_cars_parked_per_hour">
+      <property name="geometry">
+       <rect>
+        <x>910</x>
+        <y>330</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
       </property>
      </widget>
     </widget>
@@ -625,7 +648,7 @@
      <x>0</x>
      <y>0</y>
      <width>1006</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <property name="styleSheet">
