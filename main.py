@@ -12,22 +12,19 @@ class MainApp(QMainWindow, ui):
         QMainWindow.__init__(self)
         self.setupUi(self)
 
-        #self.tabWidget.tabBar().setVisible(False) #hides the tabbar but I do not want that because menu bar does not work
         self.tabWidget.setCurrentIndex(0) #sets the home page the first to pop up
-        #self.btn_Create_New_Entry.clicked.connect(lambda: self.tabWidget.setCurrentIndex(1)) #sets the home page the first to pop up
-        self.btn_Create_New_Entry.clicked.connect(self.show_add_new_entry)
-        self.btn_My_Stats.clicked.connect(lambda: self.tabWidget.setCurrentIndex(2))  #naigates to the add new stat once clicked button
+        self.btn_Create_New_Entry.clicked.connect(self.show_add_new_entry) #calls show_add_new_entry function to opens the new entry page and increment the id
         self.btn_Raw_Data.clicked.connect(lambda: self.tabWidget.setCurrentIndex(3)) #navigates to the calculated stats page 
         #self.btn_TBD.clicked.connect(lambda: self.tabWidget.setCurrentIndex(3)) #navigates to the TBD page that will be set up later 
-        
-        self.btn_save_changes.clicked.connect(self.save_entry) #button that commits the entries to database
+        self.btn_My_Stats.clicked.connect(self.show_calc_data)
+        self.btn_save_changes.clicked.connect(self.save_entry) #button that commits the entries to database in the new entry page
     #keep a count of the id to keep unique
 
     def show_add_new_entry(self): #add new entry
         self.tabWidget.setCurrentIndex(1) #page position
         self.fill_next_id() #calls method below
 
-    def fill_next_id(self):
+    def fill_next_id(self): #function to auto fill the id and autoincrement it to the next id
         try:
             id = 0 #id number
             mydb = con.connect(host = "localhost", user = "root",password = "", db = "valettracker") #Connects to sql database
@@ -37,17 +34,16 @@ class MainApp(QMainWindow, ui):
             if result:
                 for ent in result: #for each line in database
                     id += 1 #add one to keep unique key
-            self.lineEdit_id.setText(str(id + 1)) 
+            self.textBrowser_id.setText(str(id + 1)) 
         except con.Error as e:
             print(f"Database connection error: {e}")
             QMessageBox.critical(self, "Database Error", f"Error connecting to the database: {e}")
 
-
-    def save_entry(self):
+    def save_entry(self): #function to save the entry when the button is hit on the new entry page
         try:
             mydb = con.connect(host = "localhost", user = "root",password = "", db = "valettracker") #Connects to sql database
             cursor = mydb.cursor()
-            # Retrieve input from the user interface
+            # Retrieve input from the user interface in all text input boxes
             date= self.lineEdit_Date.text()
             Total_tips_earned= self.lineEdit_Total_tips_earned.text()
             valets_on_duty= self.lineEdit_Valets_on_duty.text()
@@ -69,7 +65,7 @@ class MainApp(QMainWindow, ui):
 
             QMessageBox.information(self, "Success", "Entry saved successfully!") #message box successful
 
-            self.lineEdit_Date.setText("")      #resets the text back empty 
+            self.lineEdit_Date.setText("")      #resets all text boxes back empty  once entry saved
             self.lineEdit_Total_tips_earned.setText("")
             self.lineEdit_Valets_on_duty.setText("")
             self.lineEdit_Duration.setText("")
@@ -89,6 +85,35 @@ class MainApp(QMainWindow, ui):
         except Exception as e:
             QMessageBox.critical(self, "Error", f"An unexpected error occurred: {e}")
             print(f"Error details: {e}")
+
+    def show_calc_data(self): #show calc data page
+        self.tabWidget.setCurrentIndex(2) #page position
+        self.calc_data_tips() #calls method below
+
+
+    def calc_data_tips(self): #calculate the total tips in the database and display it in the box 
+        try:
+            mydb = con.connect(host = "localhost", user = "root",password = "", db = "valettracker") #Connects to sql database
+            cursor = mydb.cursor() #set curser
+            #need to when the function is called it calls the query from the table and btn.setText(data)
+            qry = "SELECT SUM(Total_tips_earned) AS Total_Tips FROM entries;"
+            cursor.execute(qry)
+            # Fetch the query result
+            result = cursor.fetchone()  # Fetch the first result row
+
+            # Handle case where the result is None or NULL (e.g., no data in the table)
+            total_tips = result[0] if result and result[0] is not None else 0
+        
+            # Convert Decimal to float or int, then to string for displaying
+            total_tips_str = str(total_tips)  # Convert to string for setText
+        
+            # Set the result in the line edit widget
+            self.textBrowser_Total_Tips_recieved.setText(total_tips_str)
+        except con.Error as err:
+            QMessageBox.critical(self, "Database Error", f"Could not save entry: {err}")
+    
+
+
 
 
 def main():
