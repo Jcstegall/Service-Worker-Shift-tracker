@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import *
 import sys
 from PyQt5.uic import loadUiType
 import mysql.connector as con
+from utils import *
 
 ui, _  = loadUiType('ValetTracker.ui')
 
@@ -15,10 +16,11 @@ class MainApp(QMainWindow, ui):
         self.tabWidget.setCurrentIndex(0) #sets the home page the first to pop up
         self.btn_Create_New_Entry.clicked.connect(self.show_add_new_entry) #calls show_add_new_entry function to opens the new entry page and increment the id
         self.btn_Raw_Data.clicked.connect(lambda: self.tabWidget.setCurrentIndex(3)) #navigates to the calculated stats page 
-        #self.btn_TBD.clicked.connect(lambda: self.tabWidget.setCurrentIndex(3)) #navigates to the TBD page that will be set up later 
+        #self.btn_TBD.clicked.connect(lambda: self.tabWidget.setCurrentIndex(3)) #navigates to the TBD page that will be set up later
+         
         self.btn_My_Stats.clicked.connect(self.show_calc_data)
         self.btn_save_changes.clicked.connect(self.save_entry) #button that commits the entries to database in the new entry page
-    #keep a count of the id to keep unique
+        self.btn_Raw_Data.clicked.connect(self.show_raw_data)
 
     def show_add_new_entry(self): #add new entry
         self.tabWidget.setCurrentIndex(1) #page position
@@ -88,33 +90,27 @@ class MainApp(QMainWindow, ui):
 
     def show_calc_data(self): #show calc data page
         self.tabWidget.setCurrentIndex(2) #page position
-        self.calc_data_tips() #calls method below
+
+        self.textBrowser_Total_Tips_recieved.setText(str(calc_data_tips()))   #output of calc_data_tips to the button
+
+        self.textBrowser_Average_tips_per_shift.setText(str(calc_avg_tips()))  #output of calc_avg_tips to the button
+
+        self.textBrowser_Average_tips_per_hr.setText(str(calc_tips_per_hr()))   #output of calc_tips_per_hr to the button
+
+        self.textBrowser_Total_hours_worked.setText(str(calc_total_hours_worked()))  #output of duration to the button
+
+        self.textBrowser_Total_cars_parked.setText(str(calc_cars_parked()))  #output of cars_parked to the button
+
+        self.textBrowser_Cars_per_hour.setText(str(calc_cars_per_hour()))  #output of cars_parked to the button
+
+    #function to print the raw data in a good format so the user can view, delete(by id,error message if invalid id) and maybe edit
+    def show_raw_data(self):
+        self.tabWidget.setCurrentIndex(3) #page position to raw data
 
 
-    def calc_data_tips(self): #calculate the total tips in the database and display it in the box 
-        try:
-            mydb = con.connect(host = "localhost", user = "root",password = "", db = "valettracker") #Connects to sql database
-            cursor = mydb.cursor() #set curser
-            #need to when the function is called it calls the query from the table and btn.setText(data)
-            qry = "SELECT SUM(Total_tips_earned) AS Total_Tips FROM entries;"
-            cursor.execute(qry)
-            # Fetch the query result
-            result = cursor.fetchone()  # Fetch the first result row
-
-            # Handle case where the result is None or NULL (e.g., no data in the table)
-            total_tips = result[0] if result and result[0] is not None else 0
-        
-            # Convert Decimal to float or int, then to string for displaying
-            total_tips_str = str(total_tips)  # Convert to string for setText
-        
-            # Set the result in the line edit widget
-            self.textBrowser_Total_Tips_recieved.setText(total_tips_str)
-        except con.Error as err:
-            QMessageBox.critical(self, "Database Error", f"Could not save entry: {err}")
-    
-
-
-
+#change the navigation system so the top menu works, and hide menu above instead of the buttons 
+# redo the main page layout so its not buttons and an inviting info page
+# translate the sql to slqlite so it can be deployed as a local application
 
 def main():
     app = QApplication(sys.argv)
