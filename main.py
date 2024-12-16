@@ -106,7 +106,8 @@ class MainApp(QMainWindow, ui):
     #function to print the raw data in a good format so the user can view, delete(by id,error message if invalid id) and maybe edit
     def show_raw_data(self):
         self.tabWidget.setCurrentIndex(3) #page position to raw data
-
+        
+        self.textBrowser_raw_data.setText(str(display_raw_data()))
 
 #change the navigation system so the top menu works, and hide menu above instead of the buttons 
 # redo the main page layout so its not buttons and an inviting info page
