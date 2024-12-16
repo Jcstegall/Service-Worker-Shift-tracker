@@ -113,3 +113,27 @@ def calc_cars_per_hour():
 
     except con.Error as err:
         QMessageBox.critical(self, "Database Error", f"Could not save entry: {err}")
+
+#function to show the raw data in a big text browser 
+#display the entry id and have a text window with a button to delete the entry
+#make sure that button resets the page so it updates the query in real time
+def display_raw_data():
+    try:
+        mydb = con.connect(host = "localhost", user = "root",password = "", db = "valettracker") #Connects to sql database
+        cursor = mydb.cursor() #set curser
+        #need to when the function is called it calls the query from the table
+        qry = "SELECT * FROM entries"
+        cursor.execute(qry)
+        # Fetch the query result
+        result = cursor.fetchall()  # Fetch the first result row
+
+        # Handle case where the result is None or NULL (e.g., no data in the table)
+        #raw_data = result[0] if result and result[0] is not None else 0
+
+        #return
+        return result
+
+    except con.Error as err:
+        QMessageBox.critical(self, "Database Error", f"Could not save entry: {err}")
+
+
