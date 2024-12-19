@@ -311,52 +311,6 @@
        </rect>
       </property>
      </widget>
-     <widget class="QLabel" name="label_9">
-      <property name="geometry">
-       <rect>
-        <x>440</x>
-        <y>300</y>
-        <width>191</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>TBD</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit_TBD_1">
-      <property name="geometry">
-       <rect>
-        <x>640</x>
-        <y>300</y>
-        <width>141</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_10">
-      <property name="geometry">
-       <rect>
-        <x>440</x>
-        <y>380</y>
-        <width>191</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>TBD</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit_TBD_2">
-      <property name="geometry">
-       <rect>
-        <x>640</x>
-        <y>380</y>
-        <width>141</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_41">
       <property name="geometry">
        <rect>
@@ -448,19 +402,6 @@
        <string>Average tips per hr</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_Average_cars_parked_per_hour">
-      <property name="geometry">
-       <rect>
-        <x>610</x>
-        <y>330</y>
-        <width>301</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Average cars parked per hour</string>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_16">
       <property name="geometry">
        <rect>
@@ -508,19 +449,6 @@
       </property>
       <property name="text">
        <string>Total cars parked</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_19">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>330</y>
-        <width>211</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Average tips per car</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_20">
@@ -579,16 +507,6 @@
        </rect>
       </property>
      </widget>
-     <widget class="QTextBrowser" name="textBrowser_Average_tips_per_car">
-      <property name="geometry">
-       <rect>
-        <x>260</x>
-        <y>340</y>
-        <width>161</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QTextBrowser" name="textBrowser_Total_hours_worked">
       <property name="geometry">
        <rect>
@@ -615,16 +533,6 @@
         <x>840</x>
         <y>270</y>
         <width>161</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QTextBrowser" name="textBrowser_Average_cars_parked_per_hour">
-      <property name="geometry">
-       <rect>
-        <x>910</x>
-        <y>330</y>
-        <width>111</width>
         <height>31</height>
        </rect>
       </property>
@@ -687,7 +595,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_delte_id">
+     <widget class="QLineEdit" name="lineEdit_delete_id">
       <property name="geometry">
        <rect>
         <x>550</x>
