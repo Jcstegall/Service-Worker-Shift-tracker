@@ -1,4 +1,62 @@
 import mysql.connector as con
+from PyQt5.QtWidgets import QMessageBox
+
+
+def fill_next_id(self): #function to auto fill the id and autoincrement it to the next id
+    try:
+        id = 0 #id number
+        mydb = con.connect(host = "localhost", user = "root",password = "", db = "valettracker") #Connects to sql database
+        cursor = mydb.cursor()
+        cursor.execute("select * from entries") #calls entire entries database
+        result = cursor.fetchall() #fetch all lines
+        if result:
+            for ent in result: #for each line in database
+                id += 1 #add one to keep unique key
+        self.textBrowser_id.setText(str(id + 1)) 
+    except con.Error as e:
+        print(f"Database connection error: {e}")
+        QMessageBox.critical(self, "Database Error", f"Error connecting to the database: {e}")
+
+
+def save_entry_funct(self): #function to save the entry when the button is hit on the new entry page
+    try:
+        mydb = con.connect(host = "localhost", user = "root",password = "", db = "valettracker") #Connects to sql database
+        cursor = mydb.cursor()
+            # Retrieve input from the user interface in all text input boxes
+        date= self.lineEdit_Date.text()
+        Total_tips_earned= self.lineEdit_Total_tips_earned.text()
+        valets_on_duty= self.lineEdit_Valets_on_duty.text()
+        duration= self.lineEdit_Duration.text()
+        cars_parked= self.lineEdit_Cars_parked.text()
+
+            # SQL query for inserting data
+        query = """
+        INSERT INTO entries (date, Total_tips_earned, valets_on_duty, duration, cars_parked)
+        VALUES (%s, %s, %s, %s, %s)
+        """
+        values = (date, Total_tips_earned, valets_on_duty, duration, cars_parked)
+
+            # Execute the query
+        cursor.execute(query, values)
+        mydb.commit()  # Commit the transaction
+            
+        QMessageBox.information(self, "Success", "Entry saved successfully!") #message box successful
+
+        self.lineEdit_Date.setText("")      #resets all text boxes back empty  once entry saved
+        self.lineEdit_Total_tips_earned.setText("")
+        self.lineEdit_Valets_on_duty.setText("")
+        self.lineEdit_Duration.setText("")
+        self.lineEdit_Cars_parked.setText("")   
+
+    except con.Error as err: #all error messages
+        QMessageBox.critical(self, "Database Error", f"Could not save entry: {err}")
+        print(f"SQL Error: {err}")
+    except ValueError as ve:
+        QMessageBox.critical(self, "Input Error", f"Invalid input: {ve}")
+        print(f"Input Error: {ve}")
+    except Exception as e:
+        QMessageBox.critical(self, "Error", f"An unexpected error occurred: {e}")
+        print(f"Error details: {e}")
 
 def calc_data_tips(): #calculate the total tips in the database
     try:
@@ -119,21 +177,67 @@ def calc_cars_per_hour():
 #make sure that button resets the page so it updates the query in real time
 def display_raw_data():
     try:
-        mydb = con.connect(host = "localhost", user = "root",password = "", db = "valettracker") #Connects to sql database
-        cursor = mydb.cursor() #set curser
-        #need to when the function is called it calls the query from the table
-        qry = "SELECT * FROM entries"
+        # Connect to the SQL database
+        mydb = con.connect(host="localhost", user="root", password="", db="valettracker")
+        cursor = mydb.cursor()
+        
+        # Define the query to fetch all rows
+        qry = "SELECT id, date, Total_tips_earned, valets_on_duty, duration, cars_parked FROM entries"
         cursor.execute(qry)
-        # Fetch the query result
-        result = cursor.fetchall()  # Fetch the first result row
-
-        # Handle case where the result is None or NULL (e.g., no data in the table)
-        #raw_data = result[0] if result and result[0] is not None else 0
-
-        #return
-        return result
+        
+        # Fetch all results
+        result = cursor.fetchall()
+        
+        # Check if there are results
+        if not result:
+            return "No data found in the table."
+        
+        # Format the output
+        formatted_result = ""
+        for row in result:
+            formatted_result += (
+                f"ID: {row[0]}\n"
+                f"Date: {row[1]}\n"
+                f"Total Tips Earned: {row[2]}\n"
+                f"Valets on Duty: {row[3]}\n"
+                f"Duration: {row[4]}\n"
+                f"Cars Parked: {row[5]}\n"
+                f"{'-' * 30}\n"  # Separator between rows
+            )
+        
+        # Return the formatted output
+        return formatted_result
 
     except con.Error as err:
-        QMessageBox.critical(self, "Database Error", f"Could not save entry: {err}")
+        # Handle database connection errors
+        return f"Database Error: {err}"
 
+#this function needs to call self because it needs the input from lineEdit_delete_id 
+def delete_entry(self):
+    try:
+     # Get the ID entered by the user in the lineEdit_delete_id field
+        entry_id = self.lineEdit_delete_id.text().strip()
 
+                # Validate that the input is not empty and is a valid integer
+        if not entry_id.isdigit():
+            QMessageBox.warning(self, "Invalid Input", "Please enter a valid numeric ID.")
+                    
+
+                # Convert to integer (safe because of isdigit check)
+            #entry_id = int(entry_id)
+
+                # Connect to the database
+        mydb = con.connect(host="localhost", user="root", password="", db="valettracker")
+        cursor = mydb.cursor()
+
+                # Execute the DELETE query
+        qry = "DELETE FROM entries WHERE id = %s"
+        cursor.execute(qry, (entry_id,))
+        mydb.commit()  # Commit the transaction
+        self.lineEdit_delete_id.setText(str("")) #reset the space in the delete edit box empty
+
+    except con.Error as err:
+                # Handle database connection errors
+        print( f"Database Error: {err}")
+        QMessageBox.critical(self, "Error", f"An unexpected error occurred: {e}")
+    
