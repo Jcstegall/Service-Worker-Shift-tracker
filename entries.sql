@@ -28,8 +28,6 @@ CREATE TABLE `entries` (
   `valets_on_duty` int(10) NOT NULL,
   `duration` int(10) NOT NULL,
   `cars_parked` int(10) NOT NULL,
-  `TBD_1` int(11) NOT NULL,
-  `TBD_2` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
