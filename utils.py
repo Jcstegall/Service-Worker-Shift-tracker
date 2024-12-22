@@ -2,22 +2,6 @@ import mysql.connector as con
 from PyQt5.QtWidgets import QMessageBox
 
 
-def fill_next_id(self): #function to auto fill the id and autoincrement it to the next id
-    try:
-        id = 0 #id number
-        mydb = con.connect(host = "localhost", user = "root",password = "", db = "valettracker") #Connects to sql database
-        cursor = mydb.cursor()
-        cursor.execute("select * from entries") #calls entire entries database
-        result = cursor.fetchall() #fetch all lines
-        if result:
-            for ent in result: #for each line in database
-                id += 1 #add one to keep unique key
-        self.textBrowser_id.setText(str(id + 1)) 
-    except con.Error as e:
-        print(f"Database connection error: {e}")
-        QMessageBox.critical(self, "Database Error", f"Error connecting to the database: {e}")
-
-
 def save_entry_funct(self): #function to save the entry when the button is hit on the new entry page
     try:
         mydb = con.connect(host = "localhost", user = "root",password = "", db = "valettracker") #Connects to sql database
@@ -241,3 +225,26 @@ def delete_entry(self):
         print( f"Database Error: {err}")
         QMessageBox.critical(self, "Error", f"An unexpected error occurred: {e}")
     
+    #clears all of the data and trunicates the table. gives a warning box to the user before perfomring the actions
+def clear_entries(self):
+    try:
+            # Connect to the database
+        mydb = con.connect(host="localhost", user="root", password="", db="valettracker")
+        cursor = mydb.cursor()
+        #warning box parameters 
+        warning = QMessageBox()
+        warning.setIcon(QMessageBox.Warning)
+        warning.setWindowTitle("Warning")
+        warning.setText("Are you sure you want to delete all data?")
+        warning.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        response = warning.exec_()
+
+        if response == QMessageBox.Yes: #if the user hits yes execute query to delete data
+            qry = "TRUNCATE TABLE entries;"
+            cursor.execute(qry)
+            mydb.commit()  # Commit the transaction
+
+    except con.Error as err:
+        # Handle database connection errors
+        print( f"Database Error: {err}")
+        QMessageBox.critical(self, "Error", f"An unexpected error occurred: {e}")
