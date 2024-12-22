@@ -32,7 +32,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="tab_home">
      <attribute name="title">
@@ -132,7 +132,7 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_2">
+    <widget class="QWidget" name="tabNewEntry">
      <attribute name="title">
       <string>New entry</string>
      </attribute>
@@ -538,7 +538,7 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="RawData">
+    <widget class="QWidget" name="tab_6">
      <attribute name="title">
       <string>Raw Data</string>
      </attribute>
@@ -569,9 +569,9 @@
      <widget class="QTextBrowser" name="textBrowser_raw_data">
       <property name="geometry">
        <rect>
-        <x>60</x>
+        <x>20</x>
         <y>100</y>
-        <width>891</width>
+        <width>431</width>
         <height>451</height>
        </rect>
       </property>
@@ -579,8 +579,8 @@
      <widget class="QTextBrowser" name="textBrowser_2">
       <property name="geometry">
        <rect>
-        <x>80</x>
-        <y>580</y>
+        <x>460</x>
+        <y>120</y>
         <width>471</width>
         <height>41</height>
        </rect>
@@ -598,8 +598,8 @@ p, li { white-space: pre-wrap; }
      <widget class="QLineEdit" name="lineEdit_delete_id">
       <property name="geometry">
        <rect>
-        <x>550</x>
-        <y>580</y>
+        <x>910</x>
+        <y>120</y>
         <width>71</width>
         <height>41</height>
        </rect>
@@ -608,14 +608,51 @@ p, li { white-space: pre-wrap; }
      <widget class="QPushButton" name="btn_delete">
       <property name="geometry">
        <rect>
-        <x>660</x>
-        <y>580</y>
-        <width>131</width>
+        <x>750</x>
+        <y>180</y>
+        <width>241</width>
         <height>51</height>
        </rect>
       </property>
       <property name="text">
        <string>Delete</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_clear">
+      <property name="geometry">
+       <rect>
+        <x>750</x>
+        <y>250</y>
+        <width>241</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Clear data</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_19">
+      <property name="geometry">
+       <rect>
+        <x>780</x>
+        <y>310</y>
+        <width>171</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>7</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>(this will delete all data)</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="wordWrap">
+       <bool>false</bool>
       </property>
      </widget>
     </widget>
