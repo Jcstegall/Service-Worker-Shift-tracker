@@ -1,7 +1,6 @@
 import mysql.connector as con
 from PyQt5.QtWidgets import QMessageBox
 
-
 def save_entry_funct(self): #function to save the entry when the button is hit on the new entry page
     try:
         mydb = con.connect(host = "localhost", user = "root",password = "", db = "valettracker") #Connects to sql database
@@ -13,6 +12,11 @@ def save_entry_funct(self): #function to save the entry when the button is hit o
         duration= self.lineEdit_Duration.text()
         cars_parked= self.lineEdit_Cars_parked.text()
 
+        #makes sure the user filled out the required fields
+        if not date or not Total_tips_earned or not valets_on_duty or not duration: 
+            QMessageBox.warning(self, "Input Error", "Please fill all fields.")
+            return
+            
             # SQL query for inserting data
         query = """
         INSERT INTO entries (date, Total_tips_earned, valets_on_duty, duration, cars_parked)
@@ -26,7 +30,7 @@ def save_entry_funct(self): #function to save the entry when the button is hit o
             
         QMessageBox.information(self, "Success", "Entry saved successfully!") #message box successful
 
-        self.lineEdit_Date.setText("")      #resets all text boxes back empty  once entry saved
+        self.lineEdit_Date.setText("")      #resets all text boxes back empty once entry saved
         self.lineEdit_Total_tips_earned.setText("")
         self.lineEdit_Valets_on_duty.setText("")
         self.lineEdit_Duration.setText("")
@@ -46,13 +50,12 @@ def calc_data_tips(): #calculate the total tips in the database
     try:
         mydb = con.connect(host = "localhost", user = "root",password = "", db = "valettracker") #Connects to sql database
         cursor = mydb.cursor() #set curser
-        #need to when the function is called it calls the query from the table and btn.setText(data)
         qry = "SELECT SUM(Total_tips_earned) AS Total_Tips FROM entries;"
         cursor.execute(qry)
         # Fetch the query result
         result = cursor.fetchone()  # Fetch the first result row
 
-        # Handle case where the result is None or NULL (e.g., no data in the table)
+        # Handle case where the result is None
         total_tips = result[0] if result and result[0] is not None else 0
 
         #return
@@ -65,13 +68,12 @@ def calc_avg_tips(): #calculate the average tips in the database
     try:
         mydb = con.connect(host = "localhost", user = "root",password = "", db = "valettracker") #Connects to sql database
         cursor = mydb.cursor() #set curser
-        #need to when the function is called it calls the query from the table and btn.setText(data)
         qry = "SELECT ROUND(AVG(Total_tips_earned), 2) AS Average_Tips_Per_Entry FROM entries;"
         cursor.execute(qry)
         # Fetch the query result
         result = cursor.fetchone()  # Fetch the first result row
 
-        # Handle case where the result is None or NULL (e.g., no data in the table)
+        # Handle case where the result is None
         avg_tips = result[0] if result and result[0] is not None else 0
 
         #return
@@ -84,13 +86,12 @@ def calc_tips_per_hr(): #calculate the total tips per hour f
     try:
         mydb = con.connect(host = "localhost", user = "root",password = "", db = "valettracker") #Connects to sql database
         cursor = mydb.cursor() #set curser
-        #need to when the function is called it calls the query from the table
         qry = "SELECT ROUND(SUM(Total_tips_earned) / SUM(duration), 2) AS Average_Tips_Per_Hour FROM entries"
         cursor.execute(qry)
         # Fetch the query result
         result = cursor.fetchone()  # Fetch the first result row
 
-        # Handle case where the result is None or NULL (e.g., no data in the table)
+        # Handle case where the result is None
         tips_per_hr = result[0] if result and result[0] is not None else 0
 
         #return
@@ -103,13 +104,12 @@ def calc_total_hours_worked(): #calculate the total duration worked
     try:
         mydb = con.connect(host = "localhost", user = "root",password = "", db = "valettracker") #Connects to sql database
         cursor = mydb.cursor() #set curser
-        #need to when the function is called it calls the query from the table
         qry = "SELECT SUM(duration) AS Duration FROM entries;"
         cursor.execute(qry)
         # Fetch the query result
         result = cursor.fetchone()  # Fetch the first result row
 
-        # Handle case where the result is None or NULL (e.g., no data in the table)
+        # Handle case where the result is None
         duration = result[0] if result and result[0] is not None else 0
 
         #return
@@ -122,13 +122,12 @@ def calc_cars_parked(): #calculate the total cars parked
     try:
         mydb = con.connect(host = "localhost", user = "root",password = "", db = "valettracker") #Connects to sql database
         cursor = mydb.cursor() #set curser
-        #need to when the function is called it calls the query from the table
         qry = "SELECT SUM(cars_parked) AS cars_parked FROM entries;"
         cursor.execute(qry)
         # Fetch the query result
         result = cursor.fetchone()  # Fetch the first result row
 
-        # Handle case where the result is None or NULL (e.g., no data in the table)
+        # Handle case where the result is None
         cars_parked = result[0] if result and result[0] is not None else 0
 
         #return
@@ -141,13 +140,12 @@ def calc_cars_per_hour():
     try:
         mydb = con.connect(host = "localhost", user = "root",password = "", db = "valettracker") #Connects to sql database
         cursor = mydb.cursor() #set curser
-        #need to when the function is called it calls the query from the table
         qry = "SELECT ROUND(SUM(cars_parked) / SUM(duration), 2) AS cars_parked_per_hour FROM entries"
         cursor.execute(qry)
         # Fetch the query result
         result = cursor.fetchone()  # Fetch the first result row
 
-        # Handle case where the result is None or NULL (e.g., no data in the table)
+        # Handle case where the result is None
         cars_parked_per_hour = result[0] if result and result[0] is not None else 0
 
         #return
@@ -156,15 +154,13 @@ def calc_cars_per_hour():
     except con.Error as err:
         QMessageBox.critical(self, "Database Error", f"Could not save entry: {err}")
 
-#function to show the raw data in a big text browser 
-#display the entry id and have a text window with a button to delete the entry
-#make sure that button resets the page so it updates the query in real time
-def display_raw_data():
+
+def display_raw_data(): #displays the raw data from the table
     try:
         # Connect to the SQL database
         mydb = con.connect(host="localhost", user="root", password="", db="valettracker")
         cursor = mydb.cursor()
-        
+    
         # Define the query to fetch all rows
         qry = "SELECT id, date, Total_tips_earned, valets_on_duty, duration, cars_parked FROM entries"
         cursor.execute(qry)
@@ -196,8 +192,7 @@ def display_raw_data():
         # Handle database connection errors
         return f"Database Error: {err}"
 
-#this function needs to call self because it needs the input from lineEdit_delete_id 
-def delete_entry(self):
+def delete_entry(self): #delete a specific entry given by the user in the lineEdit_delete-id box
     try:
      # Get the ID entered by the user in the lineEdit_delete_id field
         entry_id = self.lineEdit_delete_id.text().strip()
@@ -206,10 +201,6 @@ def delete_entry(self):
         if not entry_id.isdigit():
             QMessageBox.warning(self, "Invalid Input", "Please enter a valid numeric ID.")
                     
-
-                # Convert to integer (safe because of isdigit check)
-            #entry_id = int(entry_id)
-
                 # Connect to the database
         mydb = con.connect(host="localhost", user="root", password="", db="valettracker")
         cursor = mydb.cursor()
@@ -225,8 +216,7 @@ def delete_entry(self):
         print( f"Database Error: {err}")
         QMessageBox.critical(self, "Error", f"An unexpected error occurred: {e}")
     
-    #clears all of the data and trunicates the table. gives a warning box to the user before perfomring the actions
-def clear_entries(self):
+def clear_entries(self):    #clears all of the data and trunicates the table. gives a warning box to the user before performing the actions
     try:
             # Connect to the database
         mydb = con.connect(host="localhost", user="root", password="", db="valettracker")
