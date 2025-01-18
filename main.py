@@ -12,7 +12,7 @@ from utils import *
 
 #can create a upload saved  database which can read a previouly downloaded database and upload into database, make sure to clear current table
 
-ui, _  = loadUiType('ValetTracker.ui')
+ui, _  = loadUiType('frontend.ui')
 
 class MainApp(QMainWindow, ui):
     def __init__(self):
