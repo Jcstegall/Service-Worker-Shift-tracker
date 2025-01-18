@@ -32,7 +32,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab_home">
      <attribute name="title">
@@ -41,9 +41,9 @@
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>330</x>
+        <x>200</x>
         <y>20</y>
-        <width>341</width>
+        <width>561</width>
         <height>51</height>
        </rect>
       </property>
@@ -56,7 +56,7 @@
        <string notr="true"/>
       </property>
       <property name="text">
-       <string>Valet Tracker</string>
+       <string>Service Worker Tracker</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_8">
@@ -178,10 +178,10 @@
        </rect>
       </property>
       <property name="text">
-       <string>Valets on duty</string>
+       <string>Workers on duty</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_Valets_on_duty">
+     <widget class="QLineEdit" name="lineEdit_workers">
       <property name="geometry">
        <rect>
         <x>230</x>
@@ -224,10 +224,10 @@
        </rect>
       </property>
       <property name="text">
-       <string>Cars parked</string>
+       <string>Customers</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_Cars_parked">
+     <widget class="QLineEdit" name="lineEdit_customers">
       <property name="geometry">
        <rect>
         <x>640</x>
@@ -351,7 +351,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Total cars parked</string>
+       <string>Total customers</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_20">
@@ -377,7 +377,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Cars per hour</string>
+       <string>Customers per hour</string>
       </property>
      </widget>
      <widget class="QTextBrowser" name="textBrowser_Total_Tips_recieved">
@@ -420,7 +420,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QTextBrowser" name="textBrowser_Total_cars_parked">
+     <widget class="QTextBrowser" name="textBrowser_Total_customers">
       <property name="geometry">
        <rect>
         <x>840</x>
@@ -430,7 +430,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QTextBrowser" name="textBrowser_Cars_per_hour">
+     <widget class="QTextBrowser" name="textBrowser_Customers_per_hour">
       <property name="geometry">
        <rect>
         <x>840</x>
@@ -567,7 +567,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1006</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="styleSheet">
