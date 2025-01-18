@@ -8,21 +8,21 @@ def save_entry_funct(self): #function to save the entry when the button is hit o
             # Retrieve input from the user interface in all text input boxes
         date= self.lineEdit_Date.text()
         Total_tips_earned= self.lineEdit_Total_tips_earned.text()
-        valets_on_duty= self.lineEdit_Valets_on_duty.text()
+        workers_on_duty= self. lineEdit_workers.text()
         duration= self.lineEdit_Duration.text()
-        cars_parked= self.lineEdit_Cars_parked.text()
+        customers= self.lineEdit_customers.text()
 
         #makes sure the user filled out the required fields
-        if not date or not Total_tips_earned or not valets_on_duty or not duration: 
+        if not date or not Total_tips_earned or not workers_on_duty or not duration: 
             QMessageBox.warning(self, "Input Error", "Please fill all fields.")
             return
             
             # SQL query for inserting data
         query = """
-        INSERT INTO entries (date, Total_tips_earned, valets_on_duty, duration, cars_parked)
+        INSERT INTO entries (date, Total_tips_earned, workers_on_duty, duration, customers)
         VALUES (%s, %s, %s, %s, %s)
         """
-        values = (date, Total_tips_earned, valets_on_duty, duration, cars_parked)
+        values = (date, Total_tips_earned, workers_on_duty, duration, customers)
 
             # Execute the query
         cursor.execute(query, values)
@@ -32,9 +32,9 @@ def save_entry_funct(self): #function to save the entry when the button is hit o
 
         self.lineEdit_Date.setText("")      #resets all text boxes back empty once entry saved
         self.lineEdit_Total_tips_earned.setText("")
-        self.lineEdit_Valets_on_duty.setText("")
+        self. lineEdit_workers.setText("")
         self.lineEdit_Duration.setText("")
-        self.lineEdit_Cars_parked.setText("")   
+        self.lineEdit_customers.setText("")   
 
     except con.Error as err: #all error messages
         QMessageBox.critical(self, "Database Error", f"Could not save entry: {err}")
@@ -118,38 +118,38 @@ def calc_total_hours_worked(): #calculate the total duration worked
     except con.Error as err:
         QMessageBox.critical(self, "Database Error", f"Could not save entry: {err}")
     
-def calc_cars_parked(): #calculate the total cars parked
+def calc_customers(): #calculate the total cars parked
     try:
         mydb = con.connect(host = "localhost", user = "root",password = "", db = "valettracker") #Connects to sql database
         cursor = mydb.cursor() #set curser
-        qry = "SELECT SUM(cars_parked) AS cars_parked FROM entries;"
+        qry = "SELECT SUM(customers) AS customers FROM entries;"
         cursor.execute(qry)
         # Fetch the query result
         result = cursor.fetchone()  # Fetch the first result row
 
         # Handle case where the result is None
-        cars_parked = result[0] if result and result[0] is not None else 0
+        customers = result[0] if result and result[0] is not None else 0
 
         #return
-        return cars_parked
+        return customers
 
     except con.Error as err:
         QMessageBox.critical(self, "Database Error", f"Could not save entry: {err}")
 
-def calc_cars_per_hour():
+def calc_customers_per_hour():
     try:
         mydb = con.connect(host = "localhost", user = "root",password = "", db = "valettracker") #Connects to sql database
         cursor = mydb.cursor() #set curser
-        qry = "SELECT ROUND(SUM(cars_parked) / SUM(duration), 2) AS cars_parked_per_hour FROM entries"
+        qry = "SELECT ROUND(SUM(customers) / SUM(duration), 2) AS customers_per_hour FROM entries"
         cursor.execute(qry)
         # Fetch the query result
         result = cursor.fetchone()  # Fetch the first result row
 
         # Handle case where the result is None
-        cars_parked_per_hour = result[0] if result and result[0] is not None else 0
+        customers_per_hour = result[0] if result and result[0] is not None else 0
 
         #return
-        return cars_parked_per_hour
+        return customers_per_hour
 
     except con.Error as err:
         QMessageBox.critical(self, "Database Error", f"Could not save entry: {err}")
@@ -162,7 +162,7 @@ def display_raw_data(): #displays the raw data from the table
         cursor = mydb.cursor()
     
         # Define the query to fetch all rows
-        qry = "SELECT id, date, Total_tips_earned, valets_on_duty, duration, cars_parked FROM entries"
+        qry = "SELECT id, date, Total_tips_earned, workers_on_duty, duration, customers FROM entries"
         cursor.execute(qry)
         
         # Fetch all results
@@ -179,9 +179,9 @@ def display_raw_data(): #displays the raw data from the table
                 f"ID: {row[0]}\n"
                 f"Date: {row[1]}\n"
                 f"Total Tips Earned: {row[2]}\n"
-                f"Valets on Duty: {row[3]}\n"
+                f"Workers on Duty: {row[3]}\n"
                 f"Duration: {row[4]}\n"
-                f"Cars Parked: {row[5]}\n"
+                f"Customers: {row[5]}\n"
                 f"{'-' * 30}\n"  # Separator between rows
             )
         

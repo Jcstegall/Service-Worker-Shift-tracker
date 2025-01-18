@@ -46,8 +46,8 @@ class MainApp(QMainWindow, ui):
         self.textBrowser_Average_tips_per_shift.setText(str(calc_avg_tips()))  #output of calc_avg_tips to textBrowser
         self.textBrowser_Average_tips_per_hr.setText(str(calc_tips_per_hr()))   #output of calc_tips_per_hr to textBrowser
         self.textBrowser_Total_hours_worked.setText(str(calc_total_hours_worked()))  #output of duration to textBrowser
-        self.textBrowser_Total_cars_parked.setText(str(calc_cars_parked()))  #output of cars_parked to textBrowser
-        self.textBrowser_Cars_per_hour.setText(str(calc_cars_per_hour()))  #output of cars_parked to textBrowser
+        self.textBrowser_Total_customers.setText(str(calc_customers()))  #output of customers to textBrowser
+        self.textBrowser_Customers_per_hour.setText(str(calc_customers_per_hour()))  #output of customers to textBrowser
 
     #function to print the raw data in a good format so the user can view 
     def show_raw_data(self):
